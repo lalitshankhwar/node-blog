@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+
+    <div class="container mt-5">
+        <h2>All Blogs</h2>
+        <% if(blogs?.length){%>
+            <div class="row">
+                <%blogs?.forEach(blog=> { %>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="/uploads/<%= blog.image %>" class="card-img-top" alt="<%= blog.title %>">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= blog.title %>
+                                </h5>
+                                <p class="card-text">
+                                    <%= blog.description.substring(0, 100) %>...
+                                </p>
+                                <a href="/blogs/<%= blog._id %>" class="btn btn-primary">View Full Content</a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+            <%}else { %>
+                <p>No record found</p>
+                <% } %>
+    </div>
+
+    <%- include('../partials/footer') %>

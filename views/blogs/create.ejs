@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+
+    <div class="container mt-5">
+        <h2>Create New Blog</h2>
+
+        <% if (errors?.length) { %>
+            <div class="alert alert-danger">
+                <% errors?.forEach(error=> { %>
+                    <p>
+                        <%= error.msg %>
+                    </p>
+                    <% }); %>
+            </div>
+            <% } %>
+
+                <form action="/blogs/create" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Blog Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Blog Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Blog Image</label>
+                        <input type="file" class="form-control" id="image" name="image" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Blog</button>
+                </form>
+    </div>
+
+    <%- include('../partials/footer') %>

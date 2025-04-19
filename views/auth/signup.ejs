@@ -1,0 +1,39 @@
+<%- include('../partials/header') %>
+
+    <div class="container mt-5">
+        <h2>Sign Up</h2>
+
+        <% if (errors?.length) { %>
+            <div class="alert alert-danger">
+                <% errors.forEach(error=> { %>
+                    <p>
+                        <%= error.msg %>
+                    </p>
+                    <% }); %>
+            </div>
+            <% } %>
+
+                <% if (error) { %>
+                    <div class="alert alert-danger">
+                        <%= error %>
+                    </div>
+                    <% } %>
+
+                        <form action="/signup" method="POST" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="profileImage" class="form-label">Profile Image</label>
+                                <input type="file" class="form-control" id="profileImage" name="profileImage" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                        </form>
+    </div>
+
+    <%- include('../partials/footer') %>

@@ -1,0 +1,57 @@
+<%- include('../partials/header') %>
+
+  <div class="container mt-5">
+    <h2>
+      <%= blog.title %>
+    </h2>
+    <img src="/uploads/<%= blog.image %>" alt="<%= blog.title %>" class="img-fluid">
+    <p class="mt-2">
+      <%= blog.description %>
+    </p>
+
+    <h4 class="border-bottom">Comments</h4>
+    <% blog.comments.forEach(comment=> { %>
+      <div class="comment border p-2 mb-3 rounded">
+        <p><strong class="text-success">
+            <%= comment?.userId?.email %> :
+          </strong>
+          <span class="fs-3">
+            <%= comment.comment %>
+          </span>
+        </p>
+        <% comment.replies.forEach(reply=> { %>
+          <div class="reply ms-5 border p-2 m-2">
+            <p><strong class="text-success">
+                <%= reply?.userId?.email %>:
+              </strong>
+              <%= reply.reply %>
+            </p>
+          </div>
+          <% }); %>
+            <% if(user){ %>
+              <form action="/blogs/<%= blog._id %>/reply" method="POST">
+                <div class="mb-3 d-flex align-item-center">
+                  <input type="hidden" name="commentId" value="<%= comment._id %>">
+                  <textarea class="form-control" name="reply" placeholder="Reply to this comment"></textarea>
+                  <button type="submit" class="btn btn-secondary ms-2">Reply</button>
+                </div>
+              </form>
+              <% } %>
+      </div>
+      <% }); %>
+
+        <h5 class="mt-3">Leave a Comment</h5>
+        <% if(user){ %>
+
+          <form action="/blogs/<%= blog._id %>/comment" class="mb-3" method="POST">
+            <div class="mb-3">
+              <textarea class="form-control" name="comment" placeholder="Write a comment"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Post Comment</button>
+          </form>
+          <% } else { %>
+            <p>Login to leave comment</p>
+            <% } %>
+  </div>
+
+  <%- include('../partials/footer') %>
