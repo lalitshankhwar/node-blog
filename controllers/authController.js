@@ -17,7 +17,11 @@ module.exports.login = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.render("/login", { errors: errors.array(), error: "" });
+    return res.render("auth/login", {
+      errors: errors.array(),
+      error: "",
+      success: "",
+    });
   }
 
   const { email, password } = req.body;
@@ -27,6 +31,7 @@ module.exports.login = async (req, res) => {
     if (!user) {
       return res.status(400).render("auth/login", {
         errors: [],
+        success: "",
         error: "Invalid email or password",
       });
     }
@@ -36,6 +41,7 @@ module.exports.login = async (req, res) => {
       return res.status(400).render("auth/login", {
         errors: [],
         error: "Invalid email or password",
+        success: "",
       });
     }
 
